@@ -22,7 +22,27 @@ void InsertionSort(int arr[], int n) {
         std::cout << arr[i] << " ";
     }
     std::cout << std::endl;
+} 
+//3.2 busqueda binaria del mayor elemento menor que el objetivo target 
+int FindLargestSmallerThanTarget(int arr[], int n, int target) {
+    int left = 0;
+    int right = n - 1;
+    int result = -1; // Inicializar el resultado como -1 (no encontrado)
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] < target) {
+            result = arr[mid]; // Actualizar el resultado
+            left = mid + 1; // Buscar en la mitad derecha
+        } else {
+            right = mid - 1; // Buscar en la mitad izquierda
+        }
+    }
+
+    return result;
 }
+
 int main() {
     //arreglo de enteros
     int arr[] = { 5, 2, 9, 1, 5, 6,7,8,3,4 };
@@ -33,5 +53,23 @@ int main() {
     }
     std::cout << std::endl;
     InsertionSort(arr, sizeof(arr) / sizeof(arr[0]));
+    //buscar el mayor elemento menor que el objetivo target
+    std::cout << "busqueda binaria del mayor elemento menor que el objetivo target=5" << std::endl;
+    int target=5;
+    int result = FindLargestSmallerThanTarget(arr, sizeof(arr) / sizeof(arr[0]), target);
+    if (result != -1) {
+        std::cout << "El mayor elemento menor que " << target << " es: " << result << std::endl;
+    } else {
+        std::cout << "No hay elementos menores que " << target << std::endl;
+    }
+    //si no existe el mayor elemento menor que el objetivo target, se debe retornar -1
+    std::cout << "busqueda binaria del mayor elemento menor que el objetivo target=1" << std::endl;
+    target=1;
+    result = FindLargestSmallerThanTarget(arr, sizeof(arr) / sizeof(arr[0]), target);
+    if (result != -1) {
+        std::cout << "El mayor elemento menor que " << target << " es: " << result << std::endl;
+    } else {
+        std::cout << "No hay elementos menores que " << target <<"entonces:"<<"-1" << std::endl;
+    }
     return 0;
 }
